@@ -4,6 +4,5 @@ export interface AreaCodes {
   Description: string;
   Type: 'Landline' | 'Mobile' | 'International';
   IsActive: boolean;
-  
   isDeleted?: boolean;
 }

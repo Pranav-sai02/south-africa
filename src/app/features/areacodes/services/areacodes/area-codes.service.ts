@@ -32,8 +32,14 @@ export class AreaCodesService {
   }
 
   updateAreaCode(areaCode: AreaCodes): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${areaCode.AreaCode}`, areaCode);
+    const idToUpdate = (areaCode as any).originalAreaCode || areaCode.AreaCode;
+
+    return this.http.put<void>(
+      `${this.apiUrl}/${idToUpdate}`, // ✅ Send ORIGINAL code in the URL
+      areaCode                        // ✅ Send new data in body
+    );
   }
+
 
   softDeleteAreaCode(areaCode: AreaCodes): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${areaCode.AreaCode}`, areaCode);

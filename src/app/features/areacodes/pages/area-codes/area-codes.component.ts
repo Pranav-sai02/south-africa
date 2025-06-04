@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActiveToggleRendererComponent } from '../../../../shared/component/active-toggle-renderer/active-toggle-renderer.component';
 import { SoftDeleteButtonRendererComponent } from '../../../../shared/component/soft-delete-button-renderer/soft-delete-button-renderer.component';
 import { AreaCodes } from '../../models/AreaCodes';
-import { AreaCodesService } from '../../services/areacodes/area-codes.service';
 import { ColDef, GetContextMenuItems, GetContextMenuItemsParams, ICellRendererParams } from 'ag-grid-community';
 import { Store } from '@ngxs/store';
 import { AddAreaCode, LoadAreaCodes, SoftDeleteAreaCode, UpdateAreaCode } from '../../state/area-code.actions';
 import { AreaCodesState } from '../../state/area-code.state';
-import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-area-codes',
@@ -94,6 +93,7 @@ export class AreaCodesComponent implements OnInit {
         justifyContent: 'center',
       },
       headerClass: 'bold-header',
+      onCellClicked: (params: any) => this.softDeleteProvider(params.data),
     },
   ];
 
@@ -137,7 +137,6 @@ export class AreaCodesComponent implements OnInit {
       Description: '',
       Type: 'Landline',
       IsActive: true,
-      
       isDeleted: false,
     };
     this.store.dispatch(new AddAreaCode(newAreaCode));

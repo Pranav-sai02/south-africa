@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-
 import { catchError, tap } from 'rxjs/operators';
 import { AreaCodes } from '../models/AreaCodes';
 import { AreaCodesService } from '../services/areacodes/area-codes.service';
 import { of } from 'rxjs';
 import { AddAreaCode, LoadAreaCodes, SoftDeleteAreaCode, UpdateAreaCode } from './area-code.actions';
+
 
 export interface AreaCodesStateModel {
   areaCodes: AreaCodes[];
@@ -96,7 +96,7 @@ updateAreaCode(ctx: StateContext<AreaCodesStateModel>, action: UpdateAreaCode) {
   ) {
     const state = ctx.getState();
     const updatedAreaCodes = state.areaCodes.filter(
-      (areaCode) => areaCode.AreaCode !== action.payload.AreaCode
+      (areaCode) => areaCode.AreaCodeId !== action.payload.AreaCodeId
     );
     ctx.patchState({ areaCodes: updatedAreaCodes });
     return this.areaCodesService.softDeleteAreaCode(action.payload);
