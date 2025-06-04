@@ -21,8 +21,14 @@ export class AreaCodesService {
     return this.http.delete<void>(`${this.apiUrl}/${code}`);
   }
 
-   addAreaCode(areaCode:  AreaCodes): Observable<AreaCodes> {
-    return this.http.post<AreaCodes>(this.apiUrl, areaCode);
+   addAreaCode(areaCode: AreaCodes): Observable<AreaCodes> {
+    const payload = {
+      AreaCode: areaCode.AreaCode,
+      Description: areaCode.Description,
+      Type: areaCode.Type,
+      IsActive: areaCode.IsActive,
+    };
+  return this.http.post<AreaCodes>(this.apiUrl, payload);
   }
 
   updateAreaCode(areaCode: AreaCodes): Observable<void> {

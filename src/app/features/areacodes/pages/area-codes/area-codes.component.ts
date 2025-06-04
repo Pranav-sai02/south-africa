@@ -133,7 +133,7 @@ export class AreaCodesComponent implements OnInit {
   addRow(): void {
     const newAreaCode:  AreaCodes = {
       AreaCodeId:0 ,
-      AreaCode: '',
+      AreaCode: '0',
       Description: '',
       Type: 'Landline',
       IsActive: true,
